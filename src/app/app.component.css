@@ -1,0 +1,16 @@
+:host{
+  --content-high-footer: 55px; 
+} 
+
+.header{
+  margin-bottom: 50px!important;
+}
+
+.wrapper {
+  margin-top: 45px;
+  min-height: calc(100% - (var(--content-high-footer)*6));
+}
+
+.footer { 
+  height: var(--content-high-footer)
+}

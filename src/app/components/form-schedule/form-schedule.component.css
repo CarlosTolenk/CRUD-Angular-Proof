@@ -1,0 +1,14 @@
+.bg-primary{
+    background-color: var(--secondary-color)!important;
+    color: var(--text-color);
+}
+
+.btn-primary{
+    background-color: var(--primary-color)!important;
+    border-color: aliceblue!important;
+}
+
+.btn.btn-primary:hover{
+    background-color: var(--primary-color-dark)!important;
+   
+}

@@ -1,0 +1,38 @@
+
+<div class="card">
+  <div class="card-header bg-primary">
+    Add new user
+  </div>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="addUser()">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"> <i class="fa fa-user"></i></span>            
+          </div>
+          <input type="text" formControlName="nameUser" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameUser.errors }" placeholder="Name Person" />
+          <div *ngIf="submitted && f.nameUser.errors" class="invalid-feedback">
+            <div *ngIf="f.nameUser.errors.required">Name is required</div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"> <i class="fa fa-phone"></i></span>
+          </div>
+          <input type="text" formControlName="phoneUser" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneUser.errors }" placeholder="Name Person" />
+          <div *ngIf="submitted && f.phoneUser.errors" class="invalid-feedback">
+            <div *ngIf="f.phoneUser.errors.required">Phone is required</div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1"> <i class="fa fa-mobile"></i></span>
+            </div>
+            <input type="text" formControlName="mobileUser"  class="form-control" placeholder="Mobile Number" >
+          </div>
+
+      <button  class="btn btn-primary btn-block">Save User</button>
+   </form> 
+</div>
+
+
+

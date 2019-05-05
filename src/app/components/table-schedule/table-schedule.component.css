@@ -1,0 +1,12 @@
+.theme-dark-light{
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+button{
+    margin-left: 5px;
+}
+
+button i {
+    color: white;
+}

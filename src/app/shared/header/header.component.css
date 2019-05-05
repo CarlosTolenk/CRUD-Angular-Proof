@@ -1,0 +1,49 @@
+:host{
+    --spacing: 50px;
+}
+
+.header{
+    max-width: 100%!important;
+}
+
+.bg-ctolenk{
+    background-color: var(--primary-color);
+}
+
+.img-brand{
+    width: 15%;
+    height: auto;
+    margin-left: var(--spacing);
+}
+
+
+.social{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+    margin-right: var(--spacing);
+   
+}
+
+.social a {
+    color: #ffffff;
+    text-decoration: none !important;
+    background-color: transparent;    
+    -webkit-text-decoration-skip: objects;
+}
+
+.social li a i {
+    margin-right: 5px;
+	font-size:25px;
+	-webkit-transition: .5s all ease;
+	-moz-transition: .5s all ease;
+	transition: .5s all ease;
+}
+.social li:hover a i {
+	font-size:30px;
+    margin-top:-10px;
+    color: var(--secondary-color);
+}
+
+
