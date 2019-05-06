@@ -23,10 +23,16 @@ export class TableScheduleComponent implements OnInit {
   ngOnInit() {
   }
 
-  editUser(id){
-    this.modeEdit.emit(id);
+  /**
+  * Emitiendo al padre la información del item que se necesita editar
+  */
+  editUser(userSchedule){
+    this.modeEdit.emit(userSchedule);
   }
 
+  /**
+  * Emitiendo al padre la información del item que se necesita borrar
+  */
   deteleuser(id){
     this.modeDelete.emit(id);
   }

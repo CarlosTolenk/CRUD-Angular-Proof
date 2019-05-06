@@ -6,6 +6,10 @@ import { parsePhoneNumber } from 'libphonenumber-js';
 })
 export class FormatphonePipe implements PipeTransform {
 
+  /**
+  * Por medio de la librearia puedo aplicarle el formato adecuado para mostrar los números de teléfonos correctamente
+  */
+
   transform(phoneValue: number | string): string {
     const stringPhone = phoneValue + '';
     const phoneNumber = parsePhoneNumber(stringPhone, 'US');

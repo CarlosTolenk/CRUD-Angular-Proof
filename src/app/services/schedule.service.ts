@@ -19,49 +19,39 @@ export class ScheduleService {
   private dataUrl = 'assets/data/schedule.json';
   private dataUserDB;
 
-  constructor(private http: HttpClient){
-    //  this.http.get(this.dataUrl)
-    //   .pipe(
-    //     map((res:any) => res.users)       
-    //   )  
-    //   .subscribe((resul) => {
-    //     this.dataUserDB = resul;       
-    //   })
-   }
+  constructor(private http: HttpClient){ }
 
+  /**
+  * Permite hacer la peteción HTTP por medio de Get y obtener la información del JSON con los registros
+  */
+ loadSchedulesData() {
+  this.http.get(this.dataUrl)
+  .pipe(
+    map((res:any) => res.users)       
+  )  
+  .subscribe((resul) => {
+    this.dataUserDB = resul;          
+    this.refresh();
+  })   
+}
+
+  /**
+  * Haciendo accesibles los datos por medio de los observables
+  */
    getSchedules(): Observable<Schedule[]> {
     return this.usersSubject.asObservable();
   }
 
+  /**
+  * Emitir los nuevos valores para que todos los que dependan se actualicen
+  */
   private refresh() {
-    // Emitir los nuevos valores para que todos los que dependan se actualicen.
     this.usersSubject.next(this.dataUserDB);
-  }
+  }  
 
-
-  loadSchedulesData() {
-    this.http.get(this.dataUrl)
-    .pipe(
-      map((res:any) => res.users)       
-    )  
-    .subscribe((resul) => {
-      this.dataUserDB = resul;          
-      this.refresh();
-    })   
-
-  }
-
-  createNewUser(user: Schedule) {
-    /**
-    * Evitar hacer this.user.push() pues estaríamos modificando los valores directamente,
-    * se debe generar un nuevo array !!!!.
-    */
-    
-
-    this.dataUserDB = [...this.dataUserDB, user];
-    this.refresh();
-  }
-
+  /**
+  * Permite hacer una copia del state generando un nuevo array y agreando el nuevo item. 
+  */
   addUserSchedule(data:ScheduleForm){   
     let newUser:Schedule = {
       _id: UUID.UUID(),
@@ -74,12 +64,19 @@ export class ScheduleService {
     this.refresh();
   }
 
+  /**
+  * Permite buscar el id del item en el arreglo creando una copia del estado pero sin ese item y luego actualizo el estado
+  */
+
   deleteUserSchedule(idDelete:string){
     const newData = this.dataUserDB.filter(userSchedule =>  userSchedule._id !== idDelete)
     this.dataUserDB = newData;
     this.refresh();  
   }
 
+  /**
+  * Permite recorrer el arreglo con map para buscar el id del item para luego modificar los datos y luego actualizar el estado
+  */
   editUserSchedule(id:string, data:ScheduleForm){
     let newData:Schedule = this.dataUserDB.map((user) =>{
       if(user._id === id){
@@ -92,7 +89,7 @@ export class ScheduleService {
     this.refresh(); 
   }
 
-  //const result = words.filter(word => word.length > 6);
+
 
 
 

@@ -18,15 +18,16 @@ export class AppComponent implements OnInit {
   public scheduleData:Observable<any[]>;
   public headerTitleTable:string[];  
   public modeCreate:boolean = true;
-  public newUser:ScheduleForm = {
-    _id:'',
-    nameUser:'',
-    phoneUser:'',
-    mobileUser:''
-  }
+  public newUser:ScheduleForm;
 
   constructor(private _scheduleService:ScheduleService){
     this.headerTitleTable = ['Name', 'Phone', 'Mobile'];
+    this.newUser = {
+      _id:'',
+      nameUser:'',
+      phoneUser:'',
+      mobileUser:''
+    }
   }
 
   ngOnInit(): void {    

@@ -23,6 +23,9 @@ export class FormScheduleComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) { }
 
+  /**
+  * Creando el formulario y capturando los valores iniciales del mismo para poder renderizarlo en los input
+  */
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
       nameUser: [this.dataSchedule.nameUser, Validators.required],
@@ -31,18 +34,30 @@ export class FormScheduleComponent implements OnInit {
    });
   }
 
+  /**
+  * Detecta los cambios de estados al momento de cambiando de modo creación o edición
+  */
   ngOnChanges(changes: SimpleChanges) {  
     this.ngOnInit();
   }
 
+  /**
+  * Enviando al padre el cierre del modo edición para volver a la creación
+  */
   changeModeF(){
     this.changeMode.emit(this.modeCreate);
   }
 
+  /**
+  * Capturando los datos de los inputs
+  */
   get f() { 
     return this.registerForm.controls; 
   }
 
+  /**
+  * Seleccionando el modo de creación o edición para capturar los datos y emitir al padre los datos con la función correspondiente
+  */
   onSubmit(){
     this.submitted = true;
     // stop here if form is invalid
@@ -55,7 +70,9 @@ export class FormScheduleComponent implements OnInit {
     }else{
       this.editUser();
     }
-
+  /**
+  * Reset del formulario
+  */
     this.registerForm.markAsPristine();
     this.registerForm.setValue({
       nameUser: '',
@@ -65,10 +82,16 @@ export class FormScheduleComponent implements OnInit {
     this.submitted = false;    
   }
 
+  /**
+  * Emitiendo al padre los datos de creación
+  */
   saveUser(){  
     this.modeAdd.emit(this.registerForm.value);
   }
 
+  /**
+  * Emitiendo al padre los datos de edición
+  */
   editUser(){
     let editUser = {
       id: this.dataSchedule._id,
@@ -76,10 +99,7 @@ export class FormScheduleComponent implements OnInit {
     }
     this.modeEdit.emit(editUser);
    this.changeModeF(); 
-
-  }
-
-  
+  } 
 
   
 
