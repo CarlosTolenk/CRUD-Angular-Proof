@@ -6,7 +6,7 @@
 <!-- Main  - this contains the most important components to app -->
 <main class="container wrapper">
   <div class="row">
-      <div class="col-7">
+      <div class="col-md-7 col-sm-12">
         <ct-table-schedule 
           [scheduleData]="scheduleData | async" 
           [headerTitleTable]="headerTitleTable"
@@ -15,7 +15,7 @@
           >
         </ct-table-schedule>
       </div>
-      <div class="col-5">
+      <div class="col-md-5 col-sm-12">
           <ct-form-schedule
             [dataSchedule]="newUser"
             [modeCreate]="modeCreate"

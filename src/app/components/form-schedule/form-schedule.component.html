@@ -24,7 +24,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-phone"></i></span>
           </div>
-          <input type="text" formControlName="phoneUser" minlength="10" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneUser.errors }" placeholder="Name Person" />
+          <input type="number" formControlName="phoneUser" minlength="10" maxlength="10" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneUser.errors }" placeholder="Name Person" />
           <div *ngIf="submitted" class="invalid-feedback">
             Phone is required with its 10 digits
           </div>
@@ -33,7 +33,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-mobile"></i></span>
           </div>
-          <input type="text"  formControlName="mobileUser"  class="form-control"  placeholder="Mobile Number" >            
+          <input type="number"  formControlName="mobileUser"  class="form-control"  placeholder="Mobile Number" >            
         </div>
       <button  class="btn btn-primary btn-block">Save User</button>      
    </form> 

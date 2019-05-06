@@ -20,7 +20,6 @@ export class TableScheduleComponent implements OnInit {
 
   constructor() { }
 
-
   ngOnInit() {
   }
 
