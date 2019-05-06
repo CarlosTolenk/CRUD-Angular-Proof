@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject} from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
@@ -15,25 +15,52 @@ import { UUID } from 'angular2-uuid';
 })
 export class ScheduleService {
 
+  private usersSubject = new BehaviorSubject([]);
   private dataUrl = 'assets/data/schedule.json';
-  public dataUserDB;
+  private dataUserDB;
 
-  constructor(private http: HttpClient) {
-     this.http.get(this.dataUrl)
-      .pipe(
-        map((res:any) => res.users)       
-      )  
-      .subscribe((resul) => {
-        this.dataUserDB = resul;       
-      })
+  constructor(private http: HttpClient){
+    //  this.http.get(this.dataUrl)
+    //   .pipe(
+    //     map((res:any) => res.users)       
+    //   )  
+    //   .subscribe((resul) => {
+    //     this.dataUserDB = resul;       
+    //   })
    }
 
+   getSchedules(): Observable<Schedule[]> {
+    return this.usersSubject.asObservable();
+  }
 
-  getSchedules(): Observable<Schedule[]> {
-    return this.http.get(this.dataUrl)
+  private refresh() {
+    // Emitir los nuevos valores para que todos los que dependan se actualicen.
+    this.usersSubject.next(this.dataUserDB);
+  }
+
+
+  loadSchedulesData() {
+    this.http.get(this.dataUrl)
     .pipe(
-      map((res:any) => res.users) 
+      map((res:any) => res.users)       
     )  
+    .subscribe((resul) => {
+      this.dataUserDB = resul;     
+      console.log(this.dataUserDB);
+      this.refresh();
+    })   
+
+  }
+
+  createNewUser(user: Schedule) {
+    /**
+    * Evitar hacer this.user.push() pues estaríamos modificando los valores directamente,
+    * se debe generar un nuevo array !!!!.
+    */
+    
+
+    this.dataUserDB = [...this.dataUserDB, user];
+    this.refresh();
   }
 
   addUserSchedule(data:ScheduleForm){   
@@ -43,8 +70,12 @@ export class ScheduleService {
       phone: data.phoneUser,
       mobile: data.mobileUser
     }
-    console.log(newUser);
+
+    this.dataUserDB = [...this.dataUserDB, newUser];
+    this.refresh();
   }
+
+
 
 
 

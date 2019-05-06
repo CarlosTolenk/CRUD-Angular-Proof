@@ -15,8 +15,6 @@ export class FormScheduleComponent implements OnInit {
   @Output() modeAdd = new EventEmitter();
 
   public registerForm: FormGroup;
-  public submitted = false;
-
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -33,18 +31,23 @@ export class FormScheduleComponent implements OnInit {
   }
 
   addUser(){
-    this.submitted = true;
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
         return;
     } 
     
     this.modeAdd.emit(this.registerForm.value);
+    this.registerForm.markAsPristine();
+    this.registerForm.setValue({
+      nameUser: '',
+      phoneUser: '',
+      mobileUser: ''
+    });  
+    
   }
 
   editUser(data:Schedule){
-
+    
   }
 
   

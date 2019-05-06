@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable} from 'rxjs';
 
 //Services
 import { ScheduleService } from './services/index';
@@ -9,20 +10,22 @@ import { Schedule, ScheduleForm } from './interfaces/index';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   
-  public scheduleData:Schedule[];
+  public scheduleData:Observable<any[]>;
   public headerTitleTable:string[];
+  private users$: Observable<any[]>;
 
   constructor(private _scheduleService:ScheduleService){
     this.headerTitleTable = ['Name', 'Phone', 'Mobile'];
   }
 
   ngOnInit(): void {    
-    this._scheduleService.getSchedules()
-      .subscribe((data:Schedule[]) => this.scheduleData = data)    
+    this._scheduleService.loadSchedulesData();
+    this.scheduleData = this._scheduleService.getSchedules();  
   }
 
   editUser(id){

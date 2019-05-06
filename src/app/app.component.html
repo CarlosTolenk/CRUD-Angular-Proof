@@ -8,7 +8,7 @@
   <div class="row">
       <div class="col-7">
         <ct-table-schedule 
-          [scheduleData]="scheduleData" 
+          [scheduleData]="scheduleData | async" 
           [headerTitleTable]="headerTitleTable"
           (modeEdit)="editUser($event)"
           (modeDelete)="deleteUser($event)"          
