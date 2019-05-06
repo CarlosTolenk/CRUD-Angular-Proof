@@ -9,6 +9,13 @@
 }
 
 .btn.btn-primary:hover{
-    background-color: var(--primary-color-dark)!important;
-   
+    background-color: var(--primary-color-dark)!important;   
+}
+
+.container-header-button{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+    margin: 0;
 }

@@ -16,8 +16,14 @@ import { Schedule, ScheduleForm } from './interfaces/index';
 export class AppComponent implements OnInit {
   
   public scheduleData:Observable<any[]>;
-  public headerTitleTable:string[];
-  private users$: Observable<any[]>;
+  public headerTitleTable:string[];  
+  public modeCreate:boolean = true;
+  public newUser:ScheduleForm = {
+    _id:'',
+    nameUser:'',
+    phoneUser:'',
+    mobileUser:''
+  }
 
   constructor(private _scheduleService:ScheduleService){
     this.headerTitleTable = ['Name', 'Phone', 'Mobile'];
@@ -28,20 +34,37 @@ export class AppComponent implements OnInit {
     this.scheduleData = this._scheduleService.getSchedules();  
   }
 
-  editUser(id){
-    console.log(id);
+  editUser(editUser){     
+    this.newUser = {
+      _id: editUser._id,
+      nameUser: editUser.name,
+      phoneUser: editUser.phone,
+      mobileUser: editUser.mobile
+    };
+ 
+    this.modeCreate = false;
+  }
+
+  changeMode(){
+    this.modeCreate = !this.modeCreate;
+    this.newUser = {
+      _id:'',
+      nameUser:'',
+      phoneUser:'',
+      mobileUser:''
+     }
   }
 
   deleteUser(id){
-    console.log(id);
+    this._scheduleService.deleteUserSchedule(id);
   }
 
   addUserForm(data:ScheduleForm){
     this._scheduleService.addUserSchedule(data);
   }
 
-  editUserForm(data:ScheduleForm){
-    console.log(data);    
+  editUserForm(data:any){    
+   this._scheduleService.editUserSchedule(data.id, data.data)
   }
 
 

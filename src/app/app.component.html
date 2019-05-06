@@ -17,12 +17,15 @@
       </div>
       <div class="col-5">
           <ct-form-schedule
+            [dataSchedule]="newUser"
+            [modeCreate]="modeCreate"
+            (changeMode)="changeMode()"
             (modeAdd)="addUserForm($event)"
             (modeEdit)="editUserForm($event)"
           >
           </ct-form-schedule>
         </div>
-    </div>    
+    </div>        
 </main>
 <!-- End Main -->
 

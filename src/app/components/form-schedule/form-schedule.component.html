@@ -1,36 +1,41 @@
 
 <div class="card">
-  <div class="card-header bg-primary">
-    Add new user
+  <div *ngIf="modeCreate" class="card-header bg-primary text-center">
+    <h5>Add new user</h5>
+  </div>
+  <div *ngIf="!modeCreate" class="card-header bg-primary">
+    <div class="container-header-button">
+      <h5>Edit existing user</h5>
+      <button (click)="changeModeF()" type="button" class="btn "><i class="fa fa-close"></i> </button>  
+    </div>  
   </div>
   <div class="card-body">
-    <form [formGroup]="registerForm" (ngSubmit)="addUser()">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-user"></i></span>            
           </div>
           <input type="text" formControlName="nameUser" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameUser.errors }" placeholder="Name Person" />
-          <div *ngIf="submitted && f.nameUser.errors" class="invalid-feedback">
-            <div *ngIf="f.nameUser.errors.required">Name is required</div>
+          <div *ngIf="submitted" class="invalid-feedback">
+                Name is required
           </div>
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="basic-addon1"> <i class="fa fa-phone"></i></span>
           </div>
-          <input type="text" formControlName="phoneUser" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneUser.errors }" placeholder="Name Person" />
-          <div *ngIf="submitted && f.phoneUser.errors" class="invalid-feedback">
-            <div *ngIf="f.phoneUser.errors.required">Phone is required</div>
+          <input type="text" formControlName="phoneUser" minlength="10" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.phoneUser.errors }" placeholder="Name Person" />
+          <div *ngIf="submitted" class="invalid-feedback">
+            Phone is required with its 10 digits
           </div>
         </div>
         <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1"> <i class="fa fa-mobile"></i></span>
-            </div>
-            <input type="text" formControlName="mobileUser"  class="form-control" placeholder="Mobile Number" >
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"> <i class="fa fa-mobile"></i></span>
           </div>
-
-      <button  class="btn btn-primary btn-block">Save User</button>
+          <input type="text"  formControlName="mobileUser"  class="form-control"  placeholder="Mobile Number" >            
+        </div>
+      <button  class="btn btn-primary btn-block">Save User</button>      
    </form> 
 </div>
 

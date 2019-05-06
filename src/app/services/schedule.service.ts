@@ -45,8 +45,7 @@ export class ScheduleService {
       map((res:any) => res.users)       
     )  
     .subscribe((resul) => {
-      this.dataUserDB = resul;     
-      console.log(this.dataUserDB);
+      this.dataUserDB = resul;          
       this.refresh();
     })   
 
@@ -74,6 +73,26 @@ export class ScheduleService {
     this.dataUserDB = [...this.dataUserDB, newUser];
     this.refresh();
   }
+
+  deleteUserSchedule(idDelete:string){
+    const newData = this.dataUserDB.filter(userSchedule =>  userSchedule._id !== idDelete)
+    this.dataUserDB = newData;
+    this.refresh();  
+  }
+
+  editUserSchedule(id:string, data:ScheduleForm){
+    let newData:Schedule = this.dataUserDB.map((user) =>{
+      if(user._id === id){
+        user._id = id;
+        user.name = data.nameUser;
+        user.phone = data.phoneUser;
+        user.mobile = data.mobileUser;
+      }
+    });
+    this.refresh(); 
+  }
+
+  //const result = words.filter(word => word.length > 6);
 
 
 
