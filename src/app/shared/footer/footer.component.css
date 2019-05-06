@@ -8,6 +8,15 @@ section {
     background-color: var(--background-dark);
 }
 
+.link{
+    color: var(--primary-color)!important;
+}
+
+.link-download{
+    color: var(--secondary-color)!important;
+}
+
+
 .footer a {
     color: #ffffff;
     text-decoration: none !important;
